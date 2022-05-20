@@ -6,6 +6,12 @@ import org.openqa.selenium.support.PageFactory;
 import sbmscripts.TestBase;
 
 public class LoginPage extends TestBase {
+    String makerEmail = properties.getProperty("site.user.email"),
+            makerPass = properties.getProperty("site.user.password"),
+            checkerEmail = properties.getProperty("site.user.email.checker"),
+            checkerPass = properties.getProperty("site.user.password.checker");
+
+    OtpPage otpPage = new OtpPage();
 
     @FindBy(name = "email")
     WebElement emailField;
@@ -20,10 +26,14 @@ public class LoginPage extends TestBase {
         PageFactory.initElements(driver, this);
     }
 
-    public OtpPage loginToUfs(){
-        emailField.sendKeys(properties.getProperty("site.user.email"));
-        passwordField.sendKeys(properties.getProperty("site.user.password"));
+    public OtpPage loginToUfs(boolean isMaker){
+        customWait(5);
+        emailField.sendKeys(isMaker ? makerEmail : checkerEmail);
+        customWait();
+        passwordField.sendKeys(isMaker ? makerPass : checkerPass);
         loginButton.click();
-        return new OtpPage();
+        customWait();
+        otpPage.setEmailTo(isMaker ? makerEmail : checkerEmail);
+        return otpPage;
     }
 }

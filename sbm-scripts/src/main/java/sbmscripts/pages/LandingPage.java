@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import sbmscripts.TestBase;
+import sbmscripts.pages.tms.TMSPage;
 
 public class LandingPage extends TestBase {
 
@@ -19,5 +20,11 @@ public class LandingPage extends TestBase {
                 .equals(pageHeader.getText());
     }
 
+    public Logout getLogout() {
+        return new Logout();
+    }
 
+    public TMSPage getTmsPage() {
+        return new TMSPage();
+    }
 }

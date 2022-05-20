@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +38,22 @@ public class TestBase {
         }
     }
 
-    public static void initialization(){
+    public static void customWait(int seconds){
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            System.out.println("Can't wait");
+        }
+    }
+    public static void customWait(){
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                System.out.println("Can't wait");
+            }
+        }
+
+    public static void initialization() {
         String browserName =  properties.getProperty("site.browser");
         boolean isLocal = properties.getProperty("site.driver").equals("local");
         desiredCapabilities.setPlatform(Platform.LINUX);
@@ -51,8 +67,16 @@ public class TestBase {
                 firefoxOptions.setAcceptInsecureCerts(true);
                 firefoxOptions.merge(desiredCapabilities);
                 try {
-                    driver = new RemoteWebDriver(new URL(properties.getProperty("site.hub.url"))
-                            , firefoxOptions);
+                    if (isLocal){
+                        System.setProperty("webdriver.gecko.driver",
+                                System.getProperty("user.dir") +
+                                        "/src/main/resources/FirefoxDriver/geckodriver.exe");
+                        driver = new ChromeDriver();
+                    }else {
+                        driver = new RemoteWebDriver(new URL(properties.getProperty("site.hub.url"))
+                                , firefoxOptions);
+                    }
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +89,9 @@ public class TestBase {
                 chromeOptions.merge(desiredCapabilities);
                 try {
                     if (isLocal){
-                        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
+                        System.setProperty("webdriver.chrome.driver",
+                                System.getProperty("user.dir") +
+                                        "/src/main/resources/ChromeDriver/chromedriver.exe");
                         driver = new ChromeDriver(chromeOptions);
                     }else {
                         driver = new RemoteWebDriver(new URL(properties.getProperty("site.hub.url"))
@@ -78,7 +104,7 @@ public class TestBase {
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.MINUTES);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(properties.getProperty("site.test.site.url"));
     }
 

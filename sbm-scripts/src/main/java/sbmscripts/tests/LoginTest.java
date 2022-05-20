@@ -14,6 +14,7 @@ public class LoginTest extends TestBase {
     LandingPage landingPage;
     OtpPage otpPage;
     Logout logout;
+    boolean isMaker = true;
 
     public LoginTest() {
         super();
@@ -27,8 +28,9 @@ public class LoginTest extends TestBase {
 
     @Test(priority = 1)
     public void loginToUfs(){
-        otpPage = loginPage.loginToUfs();
+        otpPage = loginPage.loginToUfs(isMaker);
         landingPage = otpPage.verifyOTP();
+        logout = landingPage.getLogout();
         logout.logout();
     }
 
