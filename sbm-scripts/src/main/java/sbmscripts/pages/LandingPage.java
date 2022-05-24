@@ -16,6 +16,7 @@ public class LandingPage extends TestBase {
     }
 
     public boolean landingPageHeaderValid(){
+        extentTest.info("Verifying Landing page title");
         return properties.getProperty("site.landing.header.title")
                 .equals(pageHeader.getText());
     }

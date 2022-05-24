@@ -56,35 +56,43 @@ public class Manufactures extends TestBase {
     }
 
     public AddManufacturer addManufacturer(){
+        extentTest.info("Navigate to add Manufacturer Button");
         customWait(5);
         addManufacturerButton.click();
         customWait(5);
+        extentTest.pass("Navigation to add manufacturer form successful");
         return new AddManufacturer();
     }
 
     public AddManufacturer editManufacturer(String manufacturer){
+        extentTest.info("Navigate to edit manufacturer page");
         customWait(2);
         searchField.sendKeys(manufacturer);
         customWait(5);
         editManufacturerButton.click();
         customWait(5);
+        extentTest.pass("Edit manufacturer page navigation successful");
         return new AddManufacturer();
     }
 
     public boolean isManufacturerThere(String manufacturerName){
+        extentTest.info("Search for a manufacturer");
         customWait();
         searchField.sendKeys(manufacturerName);
         customWait(10);
         try {
             specificManufacturer.isDisplayed();
+            extentTest.pass("Manufacturer is present");
             return true;
         } catch (NoSuchElementException e){
+            extentTest.info("Manufacturer not there");
             return false;
         }
 
     }
 
     public ApprovalForm approveOrDeclineManufacturer(String manufacturerName, boolean toApprove){
+        extentTest.info("Approving Manufacturer");
         customWait();
         approveManufacturerPageButton.click();
         customWait();
@@ -94,13 +102,16 @@ public class Manufactures extends TestBase {
         customWait();
         if (toApprove) {
             approveManufacturer.click();
+            extentTest.pass("Manufacturer approved");
         } else {
             declineManufacturer.click();
+            extentTest.pass("Manufacturer declined");
         }
         return new ApprovalForm();
     }
 
     public ApprovalForm deleteManufacturer(String manufacturerName){
+        extentTest.info("Delete manufacturer");
         customWait();
         searchField.sendKeys(manufacturerName);
         customWait();
@@ -108,6 +119,7 @@ public class Manufactures extends TestBase {
         customWait();
         deleteManufacturerButton.click();
         customWait();
+        extentTest.pass("Deletion successful");
         return new ApprovalForm();
     }
 

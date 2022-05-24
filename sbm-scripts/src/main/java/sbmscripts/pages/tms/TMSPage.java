@@ -1,5 +1,6 @@
 package sbmscripts.pages.tms;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,21 +21,25 @@ public class TMSPage extends TestBase {
     }
 
     public TMSDashboard enterTMS(){
+        extentTest.info("Enter the TMS dashboard");
         try {
             customWait(5);
             landingPageLink.click();
         } catch (Exception e) {
-            System.out.println("Already in Landing");
+            extentTest.info("Already in Landing");
         }
         customWait();
         tmsButton.click();
+        extentTest.pass("Entered TMS successfully");
         return new TMSDashboard();
     }
 
     public SystemSetUp getSystemSetUp(){
         customWait();
         enterTMS();
+        extentTest.info("Enter system set up");
         systemSetUp.click();
+        extentTest.pass("Successfully entered system set up");
         customWait();
         return new SystemSetUp();
     }

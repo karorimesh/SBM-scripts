@@ -22,6 +22,7 @@ public class SystemSetUp extends TestBase {
     }
 
     public Manufactures getManufacturers(){
+        extentTest.info("Manufacturer page navigation");
         customWait();
         masterRecords.click();
         try {
@@ -33,6 +34,7 @@ public class SystemSetUp extends TestBase {
             customWait();
             manufacturers.click();
         }
+        extentTest.info("Manufacturer navigation successful");
         return new Manufactures();
     }
 }

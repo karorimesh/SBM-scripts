@@ -28,6 +28,7 @@ public class Logout extends TestBase {
     }
 
     public void logout(){
+        extentTest.info("Logging out");
         try {
             customWait(5);
             landingPageLink.click();
@@ -41,5 +42,6 @@ public class Logout extends TestBase {
         customWait(3);
         logoutButton.click();
         customWait(10);
+        extentTest.pass("Successfully logged out");
     }
 }

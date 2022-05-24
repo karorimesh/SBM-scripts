@@ -31,6 +31,7 @@ public class AddManufacturer extends TestBase {
                                                   String vendorName, String desc,
                                                   boolean reset){
         customWait(5);
+        extentTest.info("Creating Manufacturer");
         manufacturerField.sendKeys(manufacturerName);
         customWait();
         vendorField.sendKeys(vendorName);
@@ -45,6 +46,7 @@ public class AddManufacturer extends TestBase {
         } else {
             createButton.click();
         }
+        extentTest.pass("Manufacturer creates successfully");
         return new Manufactures();
     }
 
@@ -52,7 +54,9 @@ public class AddManufacturer extends TestBase {
                                          String vendorName,
                                          String desc,
                                          boolean reset){
+        extentTest.info("Resetting the manufacturer Page");
         resetButton.click();
+        extentTest.pass("Manufacturer reset successful");
         return createManufacturer(manufacturerName, vendorName, desc, reset);
     }
 }

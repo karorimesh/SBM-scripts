@@ -30,7 +30,7 @@ public class ManufacturerTest extends TestBase {
 
     @BeforeMethod
     public void setUp(){
-        initialization();
+        initialization("Master records manufacturer");
         loginPage = new LoginPage();
         otpPage = loginPage.loginToUfs(isMaker);
         landingPage = otpPage.verifyOTP();
@@ -44,6 +44,7 @@ public class ManufacturerTest extends TestBase {
         logout = landingPage.getLogout();
         logout.logout();
         driver.quit();
+        extentReports.flush();
         isMaker = !isMaker;
     }
 

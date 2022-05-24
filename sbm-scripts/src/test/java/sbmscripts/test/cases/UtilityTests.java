@@ -8,6 +8,6 @@ public class UtilityTests {
     TestBase testBase = new TestBase();
     @Test
     public void setTestBase(){
-        TestBase.initialization();
+        TestBase.initialization("Some test");
     }
 }

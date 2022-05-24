@@ -23,10 +23,12 @@ public class ApprovalForm extends TestBase {
 
     public Manufactures approve(String message, WebElement manufactures){
         customWait();
+        extentTest.info("Approval actions");
         approveField.sendKeys(message);
         customWait();
         approveButton.click();
         manufactures.click();
+        extentTest.pass("Approval successful");
         return new Manufactures();
     }
 }

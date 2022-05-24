@@ -11,6 +11,7 @@ public class NotificationMessage extends TestBase {
     }
 
     public String getNotificationMessage(){
+        extentTest.info("Reading notification message");
         return notificationMessage.getText();
     }
 }

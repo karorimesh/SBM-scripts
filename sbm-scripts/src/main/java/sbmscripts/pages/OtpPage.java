@@ -29,10 +29,12 @@ public class OtpPage extends TestBase {
     public LandingPage verifyOTP(){
         this.OTPString = makeApiCall();
         customWait(5);
+        extentTest.info("Verifying OTP");
         otpTextField.sendKeys(OTPString.getOTP());
         customWait();
         verifyOtpButton.click();
         customWait();
+        extentTest.pass("OTP verification successful");
         return new LandingPage();
     }
 

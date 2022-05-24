@@ -27,12 +27,14 @@ public class LoginPage extends TestBase {
     }
 
     public OtpPage loginToUfs(boolean isMaker){
+        extentTest.info("Logging in to UFS");
         customWait(5);
         emailField.sendKeys(isMaker ? makerEmail : checkerEmail);
         customWait();
         passwordField.sendKeys(isMaker ? makerPass : checkerPass);
         loginButton.click();
         customWait();
+        extentTest.info("Receiving OTP");
         otpPage.setEmailTo(isMaker ? makerEmail : checkerEmail);
         return otpPage;
     }

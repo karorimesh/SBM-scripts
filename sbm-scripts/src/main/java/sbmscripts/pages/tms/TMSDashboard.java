@@ -17,6 +17,8 @@ public class TMSDashboard extends TestBase {
     }
 
     public boolean verifyDashboard(){
-        return pageTitle.isDisplayed();
+        boolean onPage = pageTitle.isDisplayed();
+        extentTest.pass("Confirmed on Landing page");
+        return onPage;
     }
 }
